@@ -1,0 +1,33 @@
+on:
+    push:
+        branches:
+        - main
+        - 'release/*'
+    pull_request:
+        branches:
+        - main
+        - 'release/*'
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_ACTOR: ${{ github.actor }}
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  SHORT_SHA: ${{ github.sha }}
+  VERSION_TAG: ${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build and Push image with dynamic tag
+        run: |
+          echo "Building image with tag: ${VERSION_TAG}"
+          ./mvnw verify -DskipTests -DVERSION_TAG=${VERSION_TAG}
