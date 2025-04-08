@@ -49,8 +49,8 @@
                     <to>
                         <image>ghcr.io/devkezisoft/kwatt-app:latest</image>
                         <auth>
-                            <username>${GITHUB_ACTOR}</username>
-                            <password>${GITHUB_TOKEN}</password>
+                            <username>${env.GITHUB_ACTOR}</username>
+                            <password>${env.GITHUB_TOKEN}</password>
                         </auth>
                         <tags>
                             <tag>${project.version}</tag>
