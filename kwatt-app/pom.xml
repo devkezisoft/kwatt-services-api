@@ -49,7 +49,7 @@
                     <to>
                         <image>ghcr.io/devkezisoft/kwatt-app:latest</image>
                         <tags>
-                            <tag>${VERSION}</tag>
+                            <tag>${project.version}</tag>
                             <tag>latest</tag>
                         </tags>
                     </to>
